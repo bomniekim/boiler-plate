@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
 const port = 5000;
-
 const bodyParser = require("body-parser");
+const config = require("./config/key");
 const { User } = require("./models/User"); // 데이터 모델 가져오기
 
 // for parsing
@@ -15,16 +15,13 @@ app.use(bodyParser.json());
 const mongoose = require("mongoose");
 // application과 mongoDB 연결
 mongoose
-  .connect(
-    "mongodb+srv://bomin:bomin331@boilerplate.p3rig.mongodb.net/<dbname>?retryWrites=true&w=majority",
-    {
-      // deprecation warning 제거용 옵션 설정
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
-    }
-  )
+  .connect(config.mongoURI, {
+    // deprecation warning 제거용 옵션 설정
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false,
+  })
   .then(() => console.log("mongoDB connected!"))
   .catch((err) => console.log(err));
 

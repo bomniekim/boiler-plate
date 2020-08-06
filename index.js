@@ -16,6 +16,8 @@ const mongoose = require("mongoose");
 // application과 mongoDB 연결
 mongoose
   .connect(config.mongoURI, {
+    // mongoDB userInfo 보호 설정
+
     // deprecation warning 제거용 옵션 설정
     useNewUrlParser: true,
     useUnifiedTopology: true,
